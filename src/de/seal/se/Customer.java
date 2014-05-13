@@ -32,11 +32,7 @@ class Customer {
 			// determine amounts for each line
 			totalAmount += rentalFromList.calculateBasePrice();
 			// add frequent renter points
-			frequentRenterPoints++;
-			// add bonus for a two day new release rental
-			if ((rentalFromList.getMovie().getPriceCode() == Movie.NEW_RELEASE)
-					&& rentalFromList.getDaysRented() > 1)
-				frequentRenterPoints++;
+			frequentRenterPoints += rentalFromList.getRentalPoints();
 			// show figures for this rental
 			result += "\t" + rentalFromList.getMovie().getTitle() + "\t" + "\t"
 					+ rentalFromList.getDaysRented() + "\t"

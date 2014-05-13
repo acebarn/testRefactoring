@@ -16,6 +16,15 @@ class Rental {
 	public Movie getMovie() {
 		return movie;
 	}
+	
+	public double getRentalPoints()
+	{
+		if (movie.getPriceCode() == Movie.NEW_RELEASE)
+		{
+			return 2;
+		}
+		return 1;
+	}
 
 	double calculateBasePrice() {
 		double result = 0;
