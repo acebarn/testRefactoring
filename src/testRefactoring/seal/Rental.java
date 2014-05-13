@@ -1,3 +1,6 @@
+package testRefactoring.seal;
+
+
 class Rental {
     private Movie movie;
     private int daysRented;
