@@ -1,7 +1,7 @@
 package de.seal.se;
 
-import java.lang.*;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.Vector;
 
 class Customer {
 	private String name;
@@ -32,7 +32,7 @@ class Customer {
 			// determine amounts for each line
 			totalAmount += rentalFromList.calculateBasePrice();
 			// add frequent renter points
-			frequentRenterPoints += rentalFromList.getRentalPoints();
+			frequentRenterPoints += rentalFromList.getMovie().getRentalPoints();
 			// show figures for this rental
 			result += "\t" + rentalFromList.getMovie().getTitle() + "\t" + "\t"
 					+ rentalFromList.getDaysRented() + "\t"
