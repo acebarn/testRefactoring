@@ -32,7 +32,7 @@ class Customer {
 			// determine amounts for each line
 			totalAmount += rentalFromList.calculateBasePrice();
 			// add frequent renter points
-			frequentRenterPoints += rentalFromList.getMovie().getRentalPoints();
+			frequentRenterPoints += rentalFromList.getMovie().price.getRentalPoints(rentalFromList.getMovie());
 			// show figures for this rental
 			result += "\t" + rentalFromList.getMovie().getTitle() + "\t" + "\t"
 					+ rentalFromList.getDaysRented() + "\t"

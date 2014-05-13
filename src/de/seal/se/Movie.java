@@ -1,48 +1,44 @@
 package de.seal.se;
+
 public class Movie {
-    public static final int CHILDRENS = 2;
-    public static final int REGULAR = 0;
-    public static final int NEW_RELEASE = 1;
-    private String title;
-    private int priceCode;
-    public Movie(String newtitle, int newpriceCode) {
-        title = newtitle;
-        priceCode = newpriceCode;
-    }
-    public int getPriceCode() {
-        return priceCode;
-    }
-    public void setPriceCode(int arg) {
-        priceCode = arg;
-    }
-    public String getTitle (){
-        return title;
-    }
-	public double getRentalPoints()
-	{
-		if (getPriceCode() == Movie.NEW_RELEASE)
-		{
-			return 2;
-		}
-		return 1;
+	public static final int CHILDRENS = 2;
+	public static final int REGULAR = 0;
+	public static final int NEW_RELEASE = 1;
+	private String title;
+	Price price;
+
+	public Movie(String newtitle, int newpriceCode) {
+		title = newtitle;
+		setPriceCode(newpriceCode);
+
 	}
-	double calculateBasePrice(Rental rental) {
-		double result = 0;
-		switch (rental.getMovie().getPriceCode()) {
-		case Movie.REGULAR:
-			result += 2;
-			if (rental.getDaysRented() > 2)
-				result += (rental.getDaysRented() - 2) * 1.5;
+
+	public void setPriceCode(int arg) {
+		switch (arg) {
+		case REGULAR:
+			price = new RegularPrice();
 			break;
-		case Movie.NEW_RELEASE:
-			result += rental.getDaysRented() * 3;
+		case CHILDRENS:
+			price = new ChildrensPrice();
 			break;
-		case Movie.CHILDRENS:
-			result += 1.5;
-			if (rental.getDaysRented() > 3)
-				result += (rental.getDaysRented() - 3) * 1.5;
+		case NEW_RELEASE:
+			price = new NewReleasePrice();
 			break;
+		default:
+			throw new IllegalArgumentException("Incorrect Price Code");
 		}
-		return result;
-	};
+	}
+
+	public int getPriceCode() {
+		return price.getPriceCode();
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public double calculateBasePrice(Rental rental)
+	{
+		return price.calculateBasePrice(rental);
+	}
 }

@@ -19,6 +19,6 @@ class Rental {
 	
 	public double calculateBasePrice()
 	{
-		return movie.calculateBasePrice(this);
+		return movie.price.calculateBasePrice(this);
 	}
 }
