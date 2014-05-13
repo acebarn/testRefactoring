@@ -30,7 +30,7 @@ class Customer {
 		while (enum_rentals.hasMoreElements()) {
 			Rental rentalFromList = (Rental) enum_rentals.nextElement();
 			// determine amounts for each line
-			double thisAmount = calculateBasePrice(rentalFromList);
+			totalAmount += rentalFromList.calculateBasePrice();
 			// add frequent renter points
 			frequentRenterPoints++;
 			// add bonus for a two day new release rental
@@ -40,8 +40,7 @@ class Customer {
 			// show figures for this rental
 			result += "\t" + rentalFromList.getMovie().getTitle() + "\t" + "\t"
 					+ rentalFromList.getDaysRented() + "\t"
-					+ String.valueOf(thisAmount) + "\n";
-			totalAmount += thisAmount;
+					+ String.valueOf(rentalFromList.calculateBasePrice()) + "\n";
 		}
 		// add footer lines
 		return createFooter(totalAmount, frequentRenterPoints, result);
@@ -52,26 +51,6 @@ class Customer {
 		result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
 		result += "You earned " + String.valueOf(frequentRenterPoints)
 				+ " frequent renter points";
-		return result;
-	}
-
-	private double calculateBasePrice(Rental someRental) {
-		double result = 0;
-		switch (someRental.getMovie().getPriceCode()) {
-		case Movie.REGULAR:
-			result += 2;
-			if (someRental.getDaysRented() > 2)
-				result += (someRental.getDaysRented() - 2) * 1.5;
-			break;
-		case Movie.NEW_RELEASE:
-			result += someRental.getDaysRented() * 3;
-			break;
-		case Movie.CHILDRENS:
-			result += 1.5;
-			if (someRental.getDaysRented() > 3)
-				result += (someRental.getDaysRented() - 3) * 1.5;
-			break;
-		}
 		return result;
 	}
 
